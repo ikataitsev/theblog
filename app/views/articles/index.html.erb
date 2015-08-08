@@ -27,3 +27,16 @@
 <br>
 
 <%= link_to 'New Article', new_article_path %>
+
+<div>
+  <%= form_for @new_subscription do |f| %>
+    <div class="field">
+      <%= f.label :email %><br>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

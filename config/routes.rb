@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   root 'articles#index'
+
   resources :articles do
     post :comment
+  end
+
+  resources :subscriptions do
+    get :unsubscribe
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
