@@ -10,6 +10,8 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    @comments = @article.comments
+    @new_comment = Comment.new
   end
 
   # GET /articles/new
@@ -61,14 +63,32 @@ class ArticlesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_article
-      @article = Article.find(params[:id])
-    end
+  def comment
+    article = Article.find(params[:article_id])
+    comment = article.comments.build(comment_params)
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def article_params
-      params.require(:article).permit(:title, :body)
+    respond_to do |format|
+      if comment.save
+        format.html { redirect_to article, notice: 'Your comment was successfully created.' }
+      else
+        format.html { render :new }
+      end
     end
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def article_params
+    params.require(:article).permit(:title, :body)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:email, :text)
+  end
 end
