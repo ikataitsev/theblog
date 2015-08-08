@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.recent
     @new_subscription = Subscription.new
   end
 
@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @comments = @article.comments
-    @new_comment = Comment.new
+    @comment = Comment.new
   end
 
   # GET /articles/new
@@ -64,16 +64,17 @@ class ArticlesController < ApplicationController
     end
   end
 
+  # Creates a new comment for a given article.
   def comment
-    article = Article.find(params[:article_id])
-    comment = article.comments.build(comment_params)
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.build(comment_params)
 
-    respond_to do |format|
-      if comment.save
-        format.html { redirect_to article, notice: 'Your comment was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @comment.save
+      redirect_to @article, notice: 'Your comment was successfully created.'
+    else
+      @comments = @article.comments
+      flash.now[:notice] = "Sorry, but couldn't post your comment due to: #{@comment.errors.full_messages.join(', ')}"
+      render :show
     end
   end
 

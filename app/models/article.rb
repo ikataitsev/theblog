@@ -1,7 +1,11 @@
 class Article < ActiveRecord::Base
+  scope :recent, -> { order('created_at DESC') }
+
   after_create :notify_subscribers
 
   has_many :comments
+
+  validates :title, :body, presence: true
 
   def rendered_body
     markdown.render body

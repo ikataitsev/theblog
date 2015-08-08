@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Blog</title>
+  <title>The Blog</title>
+  <meta name="viewsport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <h1><%= link_to_unless_current "The Blog", root_path %></h1>
+
+      <% if notice %>
+        <div class="alert alert-info"><%= notice %></div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

@@ -34,10 +34,11 @@ ActiveRecord::Schema.define(version: 20150808082525) do
   add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
-    t.string   "email",      null: false
-    t.string   "token",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "email",           null: false
+    t.string   "token",           null: false
+    t.datetime "unsubscribed_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

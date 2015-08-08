@@ -1,25 +1,7 @@
-<%= form_for(@subscription) do |f| %>
-  <% if @subscription.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@subscription.errors.count, "error") %> prohibited this subscription from being saved:</h2>
+<%= form_for subscription, html: { class: "form-inline" } do |f| %>
+  <div class="form-group">
+    <%= f.text_field :email, size: 40, class: "form-control", placeholder: "your@email.com" %>
+  </div>
 
-      <ul>
-      <% @subscription.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :token %><br>
-    <%= f.text_field :token %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.submit "Subscribe", class: "btn btn-default" %>
 <% end %>

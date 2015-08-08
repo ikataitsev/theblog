@@ -1,0 +1,13 @@
+<%= form_for comment, url: article_comment_path(article) do |f| %>
+  <div class="form-group">
+    <%= f.label :email, 'Email address' %>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :text, 'Comment' %>
+    <%= f.text_area :text, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Comment", class: "btn btn-default" %>
+<% end %>

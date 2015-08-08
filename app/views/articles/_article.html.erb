@@ -1,0 +1,20 @@
+<article>
+  <header>
+    <h2>
+      <%= link_to article.title, article %>
+    </h2>
+    <small><time datetime="<%= article.created_at %>"><%= time_ago_in_words(article.created_at) %> ago</time></small>
+  </header>
+
+  <p>
+    <%= article.rendered_body.html_safe %>
+  </p>
+
+  <small>
+    <%= link_to pluralize(article.comments.count, 'comment'), ( article_path(article) + "#comments" )  %>
+  </small>
+
+  <p class="text-center">
+    ◆
+  </p>
+</article>
